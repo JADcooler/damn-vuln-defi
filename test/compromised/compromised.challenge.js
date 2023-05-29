@@ -53,6 +53,10 @@ describe('Compromised challenge', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+        console.log(sources)
+        const signer = new ethers.Wallet('', ethers.provider);
+        console.log("first one "+ signer.publicKey)
+        
     });
 
     after(async function () {

