@@ -98,9 +98,9 @@ describe('[Challenge] Puppet', function () {
 
         // approve player to contract 
         
-        attackContract = await (await ethers.getContractFactory('attackPuppet', player)).deploy(token.address, uniswapExchange.address, lendingPool.address);
-
-        await attackContract. attack();
+        attackContract = await (await ethers.getContractFactory('attackPuppet', player)).deploy(token.address, uniswapExchange.address, lendingPool.address, {value: 24n * 10n ** 18n});
+        await token.connect(player).approve(attackContract.address, PLAYER_INITIAL_TOKEN_BALANCE);
+        await attackContract.attack();
 
     });
 
